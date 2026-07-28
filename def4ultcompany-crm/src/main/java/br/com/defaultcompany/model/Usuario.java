@@ -1,123 +1,103 @@
 package br.com.defaultcompany.model;
 
-public class Usuario {
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.Date;
 
-    private int id;
-    private String nome;
-    private String login;
-    private String senha;
-    private String cargo;
-    private boolean ativo;
+public class Usuario {
+    private Long pkUsuarioId;
+    private String nomeUsuario;
+    private String emailUsuario;
+    private String senhaUsuario;
+    private Boolean usuarioAtivo;
+    private LocalDateTime dataCriacao;
 
     public Usuario() {
 
     }
 
-    public Usuario(int id, String nome, String login,
-                   String senha, String cargo, boolean ativo) {
+    public Usuario(Long pkUsuarioId, String nomeUsuario,
+                   String emailUsuario, String senhaUsuario,
+                   Boolean usuarioAtivo, LocalDateTime dataCriacao) {
+        this.pkUsuarioId = pkUsuarioId;
+        setNomeUsuario(nomeUsuario);
+        setEmailUsuario(emailUsuario);
+        setSenhaUsuario(senhaUsuario);
+        setUsuarioAtivo(usuarioAtivo);
+        setDataCriacao(dataCriacao);
+    }
 
-        // Fazendo a validação de dados dentro do construtor:
+    public void setPkUsuarioId(Long pkUsuarioId) {
+        this.pkUsuarioId = pkUsuarioId;
+    }
 
-        if (nome == null || nome.isBlank()) {
+    public Long getPkUsuarioId() {
+        return pkUsuarioId;
+    }
+
+    public void setNomeUsuario(String nomeUsuario) {
+
+        if (nomeUsuario == null || nomeUsuario.trim().isBlank()) {
             throw new IllegalArgumentException("Nome não pode ser vazio!");
         }
 
-        if (login == null || login.isBlank()) {
-            throw new IllegalArgumentException("Login não pode ser vazio!");
+        this.nomeUsuario = nomeUsuario;
+    }
+
+    public String getNomeUsuario() {
+        return nomeUsuario;
+    }
+
+    public void setEmailUsuario(String emailUsuario) {
+
+        if(emailUsuario == null || emailUsuario.trim().isBlank()) {
+            throw new IllegalArgumentException("Email não pode ser vazio!");
         }
 
-        this.id = id;
-        this.nome = nome;
-        this.login = login;
-        this.senha = senha;
-        this.cargo = cargo;
-        this.ativo = ativo;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setNome(String nome) {
-
-        // Criando essa restrição para que não seja gerado nenhum valor NULO ou sem argumento
-
-        if (nome == null || nome.isBlank()) {
-            throw new IllegalArgumentException("Nome inválido");
-        }
-            this.nome = nome;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public void setLogin(String nome) {
-        // Criando essa restrição para que não seja gerado nenhum valor NULO ou sem argumento
-
-        if (login == null || login.isBlank()) {
-            throw new IllegalArgumentException("Login não pode ser vazio");
+        if (!emailUsuario.contains("@")) {
+            throw new IllegalArgumentException("Email inválido!");
         }
 
-        this.nome = nome;
+        this.emailUsuario = emailUsuario;
     }
 
-    public String getLogin() {
-        return nome;
+    public String getEmailUsuario() {
+        return emailUsuario;
     }
 
-    public void setSenha(String senha) {
+    public void setSenhaUsuario(String senhaUsuario) {
 
-        // Criando essa restrição para que não seja gerado nenhum valor NULO ou sem argumento
-
-        if (senha == null || senha.isBlank()) {
-            throw new IllegalArgumentException("Senha não pode ser vazia");
+        if (senhaUsuario == null || senhaUsuario.length() < 6) {
+            throw new IllegalArgumentException("Senha não pode ser vazia!");
         }
 
-        this.senha = senha;
+        this.senhaUsuario = senhaUsuario;
     }
 
-    public String getSenha() {
-        return senha;
+    public String getSenhaUsuario() {
+        return senhaUsuario;
     }
 
-    public void setCargo(String cargo) {
+    public void setUsuarioAtivo(Boolean usuarioAtivo) {
 
-        if (cargo == null || cargo.isBlank()) {
-            throw new IllegalArgumentException("Cargo não pode ser vazio");
+        if (usuarioAtivo == null) {
+            this.usuarioAtivo = true;
+            return;
         }
-        this.cargo = cargo;
+        this.usuarioAtivo = usuarioAtivo;
+
     }
 
-    public String getCargo() {
-        return cargo;
+    public Boolean getUsuarioAtivo() {
+        return usuarioAtivo;
     }
 
-    public void setAtivo(boolean ativo) {
-        this.ativo = ativo;
+    public void setDataCriacao(LocalDateTime dataCriacao) {
+        this.dataCriacao = dataCriacao;
     }
 
-    public boolean getAtivo() {
-        return ativo;
+    public LocalDateTime getDataCriacao() {
+        return dataCriacao;
     }
 
-    @Override
-    public String toString() {
-
-        StringBuilder sb = new StringBuilder();
-
-        sb.append("Usuário{");
-        sb.append("id=").append(id);
-        sb.append(", nome='").append(nome).append('\'');
-        sb.append(", login='").append(login).append('\'');
-        sb.append(", cargo'").append(cargo).append('\'');
-        sb.append(", ativo=").append(ativo).append('\'');
-        sb.append('}');
-
-        return sb.toString();
-    }
 }
