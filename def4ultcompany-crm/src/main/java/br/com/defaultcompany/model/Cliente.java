@@ -1,139 +1,113 @@
 package br.com.defaultcompany.model;
 
 public class Cliente {
-
-    private int id;
+    private Integer pkClienteId;
+    private String cpf;
     private String nome;
-    private String telefone;
     private String email;
-    private String redeSocial;
-    private String nicho;
-    private String ondeVeio;
-    private String trafego;
-    private String indicacao;
-    private String servicosDestribuidos;
+    private String telefone;
+    private Boolean usuarioAtivo;
 
     public Cliente() {
 
     }
 
-    public Cliente(int id, String nome,
-                   String telefone, String email,
-                   String redeSocial, String nicho,
-                   String ondeVeio, String trafego,
-                   String indicacao, String servicosDestribuidos) {
-        if (nome == null || nome.isBlank()) {
-            throw new IllegalArgumentException("Nome não pode ser vazio!");
+    public Cliente(Integer pkClienteId,
+                   String cpf,
+                   String nome,
+                   String email,
+                   String telefone,
+                   boolean usuarioAtivo) {
+        this.pkClienteId = pkClienteId;
+        setCpf(cpf);
+        setNome(nome);
+        setEmail(email);
+        setTelefone(telefone);
+        setUsuarioAtivo(usuarioAtivo);
+    }
+
+    public void setPkClienteId(Integer pkClienteId) {
+        this.pkClienteId = pkClienteId;
+    }
+
+    public Integer getPkClienteId() {
+        return pkClienteId;
+    }
+
+    public void setCpf(String cpf) {
+        if (cpf == null || cpf.trim().isBlank()) {
+            throw new IllegalArgumentException("Tentativa inválida! CPF não pode ser nulo ou conter espaços.");
         }
 
-        if (telefone == null || telefone.isBlank()) {
-            throw new IllegalArgumentException("Telefone não pode ser vazio!");
+        if(cpf.length() != 11) {
+            throw new IllegalArgumentException("Tentativa inválida! CPF deve conter exatamente 11 números.");
         }
 
-        if (email == null || email.isBlank()) {
-            throw new IllegalArgumentException("Email não pode ser vazio!");
+        if (!cpf.matches("\\d{11}")) {
+            throw new IllegalArgumentException("Tentativa inválida! CPF deve conter exatamente 11 números.");
         }
 
-        this.id = id;
+        this.cpf = cpf;
+    }
+
+    public String getCpf() {
+        return cpf;
+    }
+
+    public void setNome(String nome) {
+        if (nome == null || nome.trim().isBlank()){
+            throw new IllegalArgumentException("Tentativa inválida! Nome não pode ser nulo ou conter espaços.");
+        }
+
         this.nome = nome;
-        this.telefone = telefone;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setEmail(String email) {
+        if (email == null || email.trim().isBlank()) {
+            throw new IllegalArgumentException("Tentativa inválida! E-mail não pode ser nulo ou conter espaços.");
+        }
+
+        if (!email.contains("@")) {
+            throw new IllegalArgumentException("Tentativa inválida! E-mail deve conter @.");
+        }
+
         this.email = email;
-        this.redeSocial = redeSocial;
-        this.nicho = nicho;
-        this.ondeVeio = ondeVeio;
-        this.trafego = trafego;
-        this.indicacao = indicacao;
-        this.servicosDestribuidos = servicosDestribuidos;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getTelefone() {
-        return telefone;
-    }
-
-    public void setTelefone(String telefone) {
-        this.telefone = telefone;
     }
 
     public String getEmail() {
         return email;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setTelefone(String telefone) {
+        if (telefone == null || telefone.trim().isBlank()) {
+            throw new IllegalArgumentException("Tentativa inválida! Telefone não pode ser nulo ou conter espaços.");
+        }
+
+        if (!telefone.matches("\\d+")) {
+            throw new IllegalArgumentException("Tentativa inválida! Telefone deve conter apenas números.");
+        }
+
+        this.telefone = telefone;
     }
 
-    public String getRedeSocial() {
-        return redeSocial;
+    public String getTelefone() {
+        return telefone;
     }
 
-    public void setRedeSocial(String redeSocial) {
-        this.redeSocial = redeSocial;
+    public void setUsuarioAtivo(Boolean usuarioAtivo) {
+        if (usuarioAtivo == null) {
+            this.usuarioAtivo = true;
+            return;
+        }
+
+        this.usuarioAtivo = usuarioAtivo;
     }
 
-    public String getNicho() {
-        return nicho;
-    }
-
-    public void setNicho(String nicho) {
-        this.nicho = nicho;
-    }
-
-    public String getOndeVeio() {
-        return ondeVeio;
-    }
-
-    public void setOndeVeio(String ondeVeio) {
-        this.ondeVeio = ondeVeio;
-    }
-
-    public String getTrafego() {
-        return trafego;
-    }
-
-    public void setTrafego(String trafego) {
-        this.trafego = trafego;
-    }
-
-    public String getServicosDestribuidos() {
-        return servicosDestribuidos;
-    }
-
-    public void setServicosDestribuidos(String servicosDestribuidos) {
-        this.servicosDestribuidos = servicosDestribuidos;
-    }
-
-    public String getIndicacao() {
-        return indicacao;
-    }
-
-    public void setIndicacao(String indicacao) {
-        this.indicacao = indicacao;
-    }
-
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-
-        sb.append("Cliente{");
-        sb.append("id='").append(id).append('\'');
-        sb.append(", nome='").append(nome).append('\'');
-        sb.append(", telefone='").append(telefone).append('\'');
-        sb.append(", email='").append(email).append('\'');
-        sb.append(", redeSocial='").append(redeSocial).append('\'');
-        sb.append(", nicho='").append(nicho).append('\'');
-        sb.append(", ondeVeio='").append(ondeVeio).append('\'');
-        sb.append(", trafego='").append(trafego).append('\'');
-        sb.append(", indicacao='").append(indicacao).append('\'');
-        sb.append(", servicosDistribuidos='").append(servicosDestribuidos).append('\'');
-
-        return sb.toString();
+    public boolean getUsuarioAtivo() {
+        return usuarioAtivo;
     }
 }
