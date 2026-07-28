@@ -39,6 +39,10 @@ public class Produto {
             throw new IllegalArgumentException("Nome incorreto.");
         }
 
+        if(nomeProduto.length() > 100) {
+            throw new IllegalArgumentException("O nome do produto excedeu a quantidade de caracteres!");
+        }
+
         this.nomeProduto = nomeProduto;
     }
 
@@ -47,6 +51,11 @@ public class Produto {
     }
 
     public void setDescricaoProduto(String descricaoProduto) {
+
+        if(descricaoProduto.length() > 255) {
+            throw new IllegalArgumentException("A descrição do produto excedeu a quantidade de caracteres!");
+        }
+
         this.descricaoProduto = descricaoProduto;
     }
 

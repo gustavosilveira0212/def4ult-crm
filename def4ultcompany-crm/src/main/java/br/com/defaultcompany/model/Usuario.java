@@ -58,6 +58,10 @@ public class Usuario {
         if (!emailUsuario.contains("@")) {
             throw new IllegalArgumentException("Formato errado de email!");
         }
+
+        if(emailUsuario.length() > 100) {
+            throw new IllegalArgumentException("O email excedeu os números de caracteres!");
+        }
         this.emailUsuario = emailUsuario;
     }
 
@@ -70,6 +74,11 @@ public class Usuario {
         if (senhaUsuario == null || senhaUsuario.trim().isBlank()) {
             throw new IllegalArgumentException("A senha não pode ser vazia!");
         }
+
+        if(senhaUsuario.length() > 30) {
+            throw new IllegalArgumentException("A senha excedeu a quantidade de caracteres!");
+        }
+
         this.senhaUsuario = senhaUsuario;
     }
 

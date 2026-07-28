@@ -49,6 +49,10 @@ public class Representante {
             throw new IllegalArgumentException("Razão social inválido!");
         }
 
+        if (razaoSocial.length() > 100) {
+            throw new IllegalArgumentException("O nome da razão social excedeu a quantidade de caracteres!");
+        }
+
         this.razaoSocial = razaoSocial;
     }
 
