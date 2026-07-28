@@ -17,7 +17,7 @@ public class Cliente {
                    String nome,
                    String email,
                    String telefone,
-                   boolean usuarioAtivo) {
+                   Boolean usuarioAtivo) {
         this.pkClienteId = pkClienteId;
         setCpf(cpf);
         setNome(nome);
@@ -107,7 +107,7 @@ public class Cliente {
         this.usuarioAtivo = usuarioAtivo;
     }
 
-    public boolean getUsuarioAtivo() {
+    public Boolean getUsuarioAtivo() {
         return usuarioAtivo;
     }
 }
